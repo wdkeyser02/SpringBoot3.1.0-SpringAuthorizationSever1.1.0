@@ -1,0 +1,28 @@
+
+server:
+  port: 9000
+
+logging:
+  level:
+    org.springframework.security: INFO
+
+spring:
+  security:
+    oauth2:
+      authorizationserver:
+        client:
+          client:
+            registration:
+              client-id: "client"
+              client-secret: "{noop}secret"
+              client-authentication-methods:
+                - "client_secret_basic"
+              authorization-grant-types:
+                - "authorization_code"
+                - "refresh_token"
+              redirect-uris:
+                - "http://test"
+              scopes:
+                - "openid"
+                - "profile"
+            require-authorization-consent: false 
