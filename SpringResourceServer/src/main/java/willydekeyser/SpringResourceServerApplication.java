@@ -9,5 +9,5 @@ public class SpringResourceServerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringResourceServerApplication.class, args);
 	}
-
+	
 }
