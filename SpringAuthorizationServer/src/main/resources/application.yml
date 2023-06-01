@@ -26,3 +26,7 @@ spring:
                 - "openid"
                 - "profile"
             require-authorization-consent: false 
+#    user:
+#      name: user
+#      password: password
+#      roles: USER        
