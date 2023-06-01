@@ -22,5 +22,15 @@ public class HomeController {
 	Map<String, String> home() {
 		return homeService.home();
 	}
+	
+	@GetMapping("/user")
+	Map<String, String> user() {
+		return homeService.user();
+	}
+	
+	@GetMapping("/admin")
+	Map<String, String> admin() {
+		return homeService.admin();
+	}
 
 }

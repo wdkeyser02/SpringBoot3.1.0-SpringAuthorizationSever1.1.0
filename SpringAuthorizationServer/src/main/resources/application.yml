@@ -28,7 +28,3 @@ spring:
                 - "user.read"
                 - "user.write"
             require-authorization-consent: false 
-#    user:
-#      name: user
-#      password: password
-#      roles: USER        

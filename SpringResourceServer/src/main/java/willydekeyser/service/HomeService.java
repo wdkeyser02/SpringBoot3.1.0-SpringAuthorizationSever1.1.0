@@ -15,4 +15,16 @@ public class HomeService {
 		var jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return Map.of("home", "Home: " + jwt.getSubject());
 	}
+	
+	@PreAuthorize("hasRole('USER')")
+	public Map<String, String> user() {
+		var jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return Map.of("home", "USER: " + jwt.getSubject());
+	}
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	public Map<String, String> admin() {
+		var jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return Map.of("home", "ADMIN: " + jwt.getSubject());
+	}
 }
