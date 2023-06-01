@@ -2,19 +2,25 @@ package willydekeyser.controller;
 
 import java.util.Map;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import willydekeyser.service.HomeService;
+
 @Controller
 @ResponseBody
 public class HomeController {
-		
-		@GetMapping("/hello")
-		Map<String, String> home(@AuthenticationPrincipal Jwt jwt) {
-			return Map.of("home", "Home: " + jwt.getSubject());
-		}
+
+	private final HomeService homeService;
+
+	public HomeController(HomeService homeService) {
+		this.homeService = homeService;
+	}
+
+	@GetMapping("/hello")
+	Map<String, String> home() {
+		return homeService.home();
+	}
 
 }

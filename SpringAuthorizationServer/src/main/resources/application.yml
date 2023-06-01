@@ -25,6 +25,8 @@ spring:
               scopes:
                 - "openid"
                 - "profile"
+                - "user.read"
+                - "user.write"
             require-authorization-consent: false 
 #    user:
 #      name: user
