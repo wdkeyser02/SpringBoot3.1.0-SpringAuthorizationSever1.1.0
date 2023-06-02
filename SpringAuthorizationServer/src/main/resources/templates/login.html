@@ -5,25 +5,25 @@
 		<link rel="stylesheet" th:href="@{/css/style.css}">
 	</head>
 	<body>
-	<div class="login-page">
-  	<div class="form">
-		<h1>Spring Boot Tutorial</h1>
-		<h2>Please Log In</h2>
-		<div class="error" th:if="${param.error}">
-			Invalid username and password.</div>
-		<div th:if="${param.logout}">
-			You have been logged out.</div>
-		<form  class="login-form" th:action="@{/login}" method="post">
-			<div>
-			<input type="text" name="username" placeholder="Username"/>
+		<div class="login-page">
+		  	<div class="form">
+				<h1>Spring Boot Tutorial</h1>
+				<h2>Please Log In</h2>
+				<div class="error" th:if="${param.error}">
+					Invalid username and password.</div>
+				<div class="error" th:if="${param.logout}">
+					You have been logged out.</div>
+				<form  class="login-form" th:action="@{/login}" method="post">
+					<div>
+					<input type="text" name="username" placeholder="Username"/>
+					</div>
+					<div>
+					<input type="password" name="password" placeholder="Password"/>
+					</div>
+					<input class="button" type="submit" value="Log in" />
+				</form>
+				<p>Willy De Keyser</p>
 			</div>
-			<div>
-			<input type="password" name="password" placeholder="Password"/>
-			</div>
-			<input class="button" type="submit" value="Log in" />
-		</form>
-		<p>Willy De Keyser</p>
-		</div>
 		</div>
 	</body>
 </html>
