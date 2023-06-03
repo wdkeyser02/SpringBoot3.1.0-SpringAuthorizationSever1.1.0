@@ -4,7 +4,9 @@ server:
 
 logging:
   level:
-    org.springframework.security: INFO
+    org:
+      springframework:
+        security: INFO
 
 spring:
   security:
@@ -27,4 +29,5 @@ spring:
                 - "profile"
                 - "user.read"
                 - "user.write"
-            require-authorization-consent: false 
+            require-authorization-consent: false
+            require-proof-key: true
