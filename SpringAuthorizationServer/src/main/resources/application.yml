@@ -24,6 +24,8 @@ spring:
                 - "refresh_token"
               redirect-uris:
                 - "http://test"
+              post-logout-redirect-uris:
+                - "https://www.google.be"  
               scopes:
                 - "openid"
                 - "profile"
