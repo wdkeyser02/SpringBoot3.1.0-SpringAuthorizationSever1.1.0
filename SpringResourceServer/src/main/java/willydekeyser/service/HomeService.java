@@ -10,12 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class HomeService {
 
-	@PreAuthorize("hasAuthority('SCOPE_user.read')")
-	public Map<String, String> home() {
-		var jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return Map.of("home", "Home: " + jwt.getSubject());
-	}
-	
 	@PreAuthorize("hasRole('USER')")
 	public Map<String, String> user() {
 		var jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

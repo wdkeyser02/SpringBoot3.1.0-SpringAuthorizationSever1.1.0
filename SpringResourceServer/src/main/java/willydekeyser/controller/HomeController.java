@@ -19,8 +19,8 @@ public class HomeController {
 	}
 
 	@GetMapping("/hello")
-	Map<String, String> home() {
-		return homeService.home();
+	String home() {
+		return "HELLO!";
 	}
 	
 	@GetMapping("/user")

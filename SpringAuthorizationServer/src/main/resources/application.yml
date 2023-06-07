@@ -23,7 +23,7 @@ spring:
                 - "authorization_code"
                 - "refresh_token"
               redirect-uris:
-                - "http://test"
+                - "http://127.0.0.1:8080/login/oauth2/code/spring"
               post-logout-redirect-uris:
                 - "https://www.google.be"  
               scopes:
@@ -32,4 +32,4 @@ spring:
                 - "user.read"
                 - "user.write"
             require-authorization-consent: false
-            require-proof-key: true
+            require-proof-key: false

@@ -1,0 +1,30 @@
+server:
+  port: 8080
+  
+spring:
+  application:
+    name: springoauthclient
+  cloud:
+    gateway:
+      default-filters:
+        - TokenRelay=
+      routes:
+        - id: route
+          uri: http://localhost:8081/
+          predicates:
+            - Path=/**
+  security:
+    oauth2:
+      client:
+        registration:
+          gateway:
+            provider: spring
+            client-id: client
+            client-secret: secret
+            scope: openid, profile, user.read
+            authorization-grant-type: authorization_code
+            client-authorization-metgod: client_secret_basic
+            redirect-uri: http://127.0.0.1:8080/login/oauth2/code/spring
+        provider:
+          spring:
+            issuer-uri: http://localhost:9000        
