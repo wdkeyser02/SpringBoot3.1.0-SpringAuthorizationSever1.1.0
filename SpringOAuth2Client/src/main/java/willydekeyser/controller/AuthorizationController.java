@@ -24,9 +24,7 @@ public class AuthorizationController {
 	}
 
 	@GetMapping(value = "/user")
-	public String user(Model model,
-			@RegisteredOAuth2AuthorizedClient("springoauthclient")
-				OAuth2AuthorizedClient authorizedClient) {
+	public String user(Model model, @RegisteredOAuth2AuthorizedClient("springoauthclient") OAuth2AuthorizedClient authorizedClient) {
 
 		String messages = this.webClient
 				.get()
@@ -36,14 +34,11 @@ public class AuthorizationController {
 				.bodyToMono(String.class)
 				.block();
 		model.addAttribute("messages", messages);
-
 		return "index";
 	}
 
 	@GetMapping(value = "/admin")
-	public String admin(Model model,
-			@RegisteredOAuth2AuthorizedClient("springoauthclient")
-				OAuth2AuthorizedClient authorizedClient) {
+	public String admin(Model model, @RegisteredOAuth2AuthorizedClient("springoauthclient") OAuth2AuthorizedClient authorizedClient) {
 
 		String messages = this.webClient
 				.get()
@@ -53,7 +48,6 @@ public class AuthorizationController {
 				.bodyToMono(String.class)
 				.block();
 		model.addAttribute("messages", messages);
-
 		return "index";
 	}
 

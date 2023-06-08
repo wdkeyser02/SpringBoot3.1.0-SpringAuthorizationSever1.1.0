@@ -19,8 +19,7 @@ public class WebClientConfig {
 
 	@Bean
 	WebClient webClient(OAuth2AuthorizedClientManager authorizedClientManager) {
-		ServletOAuth2AuthorizedClientExchangeFilterFunction oauth2Client =
-				new ServletOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager);
+		ServletOAuth2AuthorizedClientExchangeFilterFunction oauth2Client = new ServletOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager);
 		return WebClient.builder()
 				.apply(oauth2Client.oauth2Configuration())
 				.build();
@@ -31,20 +30,14 @@ public class WebClientConfig {
 			ClientRegistrationRepository clientRegistrationRepository,
 			OAuth2AuthorizedClientRepository authorizedClientRepository) {
 
-		OAuth2AuthorizedClientProvider authorizedClientProvider =
-				OAuth2AuthorizedClientProviderBuilder.builder()
+		OAuth2AuthorizedClientProvider authorizedClientProvider = OAuth2AuthorizedClientProviderBuilder.builder()
 						.authorizationCode()
 						.refreshToken()
-						.clientCredentials()
-						//.provider(new DeviceCodeOAuth2AuthorizedClientProvider())
 						.build();
 
 		DefaultOAuth2AuthorizedClientManager authorizedClientManager = new DefaultOAuth2AuthorizedClientManager(
 				clientRegistrationRepository, authorizedClientRepository);
 		authorizedClientManager.setAuthorizedClientProvider(authorizedClientProvider);
-
-		//authorizedClientManager.setContextAttributesMapper(DeviceCodeOAuth2AuthorizedClientProvider
-		//		.deviceCodeContextAttributesMapper());
 
 		return authorizedClientManager;
 	}
