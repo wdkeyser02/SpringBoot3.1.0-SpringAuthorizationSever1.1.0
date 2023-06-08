@@ -16,7 +16,7 @@
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="/user" th:href="@{/user}"> User </a></li>
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="/admin" th:href="@{/admin}"> Admin </a></li>
             </ul>
-            <div th:if="${login}" >
+            <div th:if="${login}">
             	<form class="d-flex" th:action="@{/logout}" method="post">
                 	<button class="btn btn-outline-dark" type="submit">Logout</button>
             	</form>
