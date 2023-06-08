@@ -1,7 +1,5 @@
 package willydekeyser.service;
 
-import java.util.Map;
-
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -11,14 +9,14 @@ import org.springframework.stereotype.Service;
 public class HomeService {
 
 	@PreAuthorize("hasRole('USER')")
-	public Map<String, String> user() {
+	public String user() {
 		var jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return Map.of("home", "USER: " + jwt.getSubject());
+		return "Home: USER - Username: " + jwt.getSubject();
 	}
 	
 	@PreAuthorize("hasRole('ADMIN')")
-	public Map<String, String> admin() {
+	public String admin() {
 		var jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return Map.of("home", "ADMIN: " + jwt.getSubject());
+		return "Home: ADMIN - Username: " + jwt.getSubject();
 	}
 }

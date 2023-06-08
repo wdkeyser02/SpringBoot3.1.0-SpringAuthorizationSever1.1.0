@@ -1,7 +1,5 @@
 package willydekeyser.controller;
 
-import java.util.Map;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,12 +22,12 @@ public class HomeController {
 	}
 	
 	@GetMapping("/user")
-	Map<String, String> user() {
+	String user() {
 		return homeService.user();
 	}
 	
 	@GetMapping("/admin")
-	Map<String, String> admin() {
+	String admin() {
 		return homeService.admin();
 	}
 

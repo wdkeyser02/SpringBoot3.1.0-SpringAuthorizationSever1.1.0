@@ -1,0 +1,24 @@
+server:
+  port: 8080
+  
+spring:
+  security:
+    user:
+      name: user
+      password: password
+    oauth2:
+      client:
+        registration:
+          springoauthclient:
+            provider: spring
+            client-id: client
+            client-secret: secret
+            scope: openid, profile, user.read
+            authorization-grant-type: authorization_code
+            client-authorization-method: client_secret_basic
+            redirect-uri: http://127.0.0.1:8080/login/oauth2/code/spring
+        provider:
+          spring:
+            issuer-uri: http://localhost:9000
+messages:
+  base-uri: http://127.0.0.1:8081            
