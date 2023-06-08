@@ -20,13 +20,11 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	SecurityFilterChain securityFilterChain(HttpSecurity http,
-			ClientRegistrationRepository clientRegistrationRepository) throws Exception {
+	SecurityFilterChain securityFilterChain(HttpSecurity http, ClientRegistrationRepository clientRegistrationRepository) throws Exception {
 		http
 			.authorizeHttpRequests(authorize ->
 				authorize
-					.requestMatchers("/logged-out").permitAll()
-					.requestMatchers("/", "/index").permitAll()
+					.requestMatchers("/logged-out", "/", "/index").permitAll()
 					.anyRequest().authenticated()
 			)
 			.oauth2Login(withDefaults())
@@ -36,13 +34,9 @@ public class SecurityConfig {
 		return http.build();
 	}
 
-	private LogoutSuccessHandler oidcLogoutSuccessHandler(
-			ClientRegistrationRepository clientRegistrationRepository) {
-		OidcClientInitiatedLogoutSuccessHandler oidcLogoutSuccessHandler =
-				new OidcClientInitiatedLogoutSuccessHandler(clientRegistrationRepository);
-
+	private LogoutSuccessHandler oidcLogoutSuccessHandler(ClientRegistrationRepository clientRegistrationRepository) {
+		OidcClientInitiatedLogoutSuccessHandler oidcLogoutSuccessHandler = new OidcClientInitiatedLogoutSuccessHandler(clientRegistrationRepository);
 		oidcLogoutSuccessHandler.setPostLogoutRedirectUri("{baseUrl}/logged-out");
-
 		return oidcLogoutSuccessHandler;
 	}
 }

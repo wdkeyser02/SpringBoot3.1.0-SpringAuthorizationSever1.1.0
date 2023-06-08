@@ -34,6 +34,7 @@ public class AuthorizationController {
 				.bodyToMono(String.class)
 				.block();
 		model.addAttribute("messages", messages);
+		model.addAttribute("login", true);
 		return "index";
 	}
 
@@ -48,12 +49,14 @@ public class AuthorizationController {
 				.bodyToMono(String.class)
 				.block();
 		model.addAttribute("messages", messages);
+		model.addAttribute("login", true);
 		return "index";
 	}
 
 	@ExceptionHandler(WebClientResponseException.class)
 	public String handleError(Model model, WebClientResponseException ex) {
 		model.addAttribute("error", ex.getMessage());
+		model.addAttribute("login", true);
 		return "index";
 	}
 }
