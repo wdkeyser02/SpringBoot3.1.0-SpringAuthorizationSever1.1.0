@@ -4,15 +4,32 @@ server:
 spring:
   application:
     name: springoauthclient
+  session:
+    store-type: redis
+  data:   
+    redis:
+      host: redis-14484.c16.us-east-1-2.ec2.cloud.redislabs.com
+      port: 14484
+      password: zSs6oeV6Wh3MfG2uEev1YbcGP0qwsZng
+      username: default
   cloud:
     gateway:
       default-filters:
         - TokenRelay=
+        - SaveSession
       routes:
         - id: route
           uri: http://localhost:8081/
           predicates:
             - Path=/**
+          filters:
+            - name: Retry
+              args:
+                retries: 10
+                methods: GET
+                backoff:
+                  firstBackoff: 10000ms
+                  maxBackoff: 50000ms      
   security:
     oauth2:
       client:
@@ -23,6 +40,7 @@ spring:
             client-secret: secret
             scope: openid, profile, user.read
             authorization-grant-type: authorization_code
+            client-authorization-method: client_secret_basic
             redirect-uri: http://127.0.0.1:8080/login/oauth2/code/spring
         provider:
           spring:
