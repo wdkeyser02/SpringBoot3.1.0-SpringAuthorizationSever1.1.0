@@ -1,6 +1,10 @@
 server:
   port: 8080
   
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    
 spring:
   application:
     name: springoauthclient
@@ -28,8 +32,8 @@ spring:
                 retries: 10
                 methods: GET
                 backoff:
-                  firstBackoff: 10000ms
-                  maxBackoff: 50000ms      
+                  firstBackoff: 1000ms
+                  maxBackoff: 5000ms      
   security:
     oauth2:
       client:
