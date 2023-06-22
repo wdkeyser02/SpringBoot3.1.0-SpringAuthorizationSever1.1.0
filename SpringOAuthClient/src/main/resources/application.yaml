@@ -10,8 +10,8 @@ spring:
     redis:
       host: redis-14484.c16.us-east-1-2.ec2.cloud.redislabs.com
       port: 14484
-      password: zSs6oeV6Wh3MfG2uEev1YbcGP0qwsZng
-      username: default
+      password: Willy123456789?
+      username: willydekeyser
   cloud:
     gateway:
       default-filters:
