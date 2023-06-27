@@ -1,16 +1,30 @@
 server:
   port: 8080
-  
+
 logging:
   level:
     org.springframework.cloud.gateway: TRACE
-    
+
 spring:
   application:
     name: springoauthclient
+  security:
+    oauth2:
+      client:
+        registration:
+          gateway:
+            provider: spring
+            client-id: client
+            client-secret: secret
+            scope: openid, profile, user.read
+            authorization-grant-type: authorization_code
+            redirect-uri: http://127.0.0.1:8080/login/oauth2/code/spring
+        provider:
+          spring:
+            issuer-uri: http://localhost:9000  
   session:
     store-type: redis
-  data:   
+  data:
     redis:
       host: redis-14484.c16.us-east-1-2.ec2.cloud.redislabs.com
       port: 14484
@@ -27,25 +41,26 @@ spring:
           predicates:
             - Path=/**
           filters:
+            - name: CircuitBreaker
+              args:
+                name: resourceServer
+                fallbackUri: forward:/fallback                            
             - name: Retry
               args:
-                retries: 10
+                retries: 30
                 methods: GET
                 backoff:
-                  firstBackoff: 1000ms
-                  maxBackoff: 5000ms      
-  security:
-    oauth2:
-      client:
-        registration:
-          gateway:
-            provider: spring
-            client-id: client
-            client-secret: secret
-            scope: openid, profile, user.read
-            authorization-grant-type: authorization_code
-            client-authorization-method: client_secret_basic
-            redirect-uri: http://127.0.0.1:8080/login/oauth2/code/spring
-        provider:
-          spring:
-            issuer-uri: http://localhost:9000        
+                  firstBackoff: 10ms
+                  maxBackoff: 500ms
+resilience4j:
+  circuitbreaker:
+    instances:
+      resourceServer:
+        slidingWindowSize: 10
+        permittedNumberOfCallsInHalfOpenState: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10000
+  timelimiter:
+    configs:
+     resourceServer:
+         timeoutDuration: 20s
